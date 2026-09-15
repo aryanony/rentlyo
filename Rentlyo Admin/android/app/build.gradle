@@ -1,0 +1,60 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
+}
+
+android {
+    namespace "com.rentlyo.admin"
+    compileSdk 36
+    ndkVersion "28.2.13676358"
+
+    defaultConfig {
+        applicationId "com.rentlyo.admin"
+        minSdkVersion flutter.minSdkVersion
+        targetSdk 35
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    signingConfigs {
+        debug {
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+        release {
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            shrinkResources false
+            ndk {
+                debugSymbolLevel 'NONE'
+            }
+        }
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
+}
+
+flutter {
+    source "../.."
+}

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "424317413167",
+    "project_id": "rentlyo-lease",
+    "storage_bucket": "rentlyo-lease.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424317413167:android:c8c390bc2689fc7c2263da",
+        "android_client_info": {
+          "package_name": "com.rentlyo.admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjN9ge7WQMvBmlLkOoxRtua-Pa0vsG4tw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424317413167:android:b9ffd3d76446dd4c2263da",
+        "android_client_info": {
+          "package_name": "com.rentlyo.renter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjN9ge7WQMvBmlLkOoxRtua-Pa0vsG4tw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

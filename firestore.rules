@@ -1,0 +1,171 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── SAFE HELPER FUNCTIONS (Lifetime Production Resilient) ──────────
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isUserDocExists() {
+      return isSignedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    function myRole() {
+      return isUserDocExists() ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role : "";
+    }
+
+    function isOwner() {
+      return isSignedIn() && (myRole() == "owner" || (request.auth.token != null && ('role' in request.auth.token) && request.auth.token.role == "owner"));
+    }
+
+    function myRenterId() {
+      return isUserDocExists() ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.renterId : "";
+    }
+
+    // ─── 1. USERS COLLECTION ────────────────────────────────────────────
+    match /users/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isOwner());
+      allow create, update: if isSignedIn() && (request.auth.uid == uid || isOwner());
+      allow delete: if isOwner();
+    }
+
+    // ─── 2. PROPERTIES (Public read for initial brand load) ──────────────
+    match /properties/{propertyId} {
+      allow read: if true;
+      allow write: if isOwner();
+    }
+
+    // ─── 3. UNITS / ROOMS / SHOPS ───────────────────────────────────────
+    match /units/{unitId} {
+      allow read: if isSignedIn();
+      allow write: if isOwner();
+    }
+
+    // ─── 4. LEASE DEALS ─────────────────────────────────────────────────
+    match /deals/{dealId} {
+      allow read: if isSignedIn() && (
+        isOwner() || 
+        resource.data.renterId == myRenterId() || 
+        resource.data.renterId == request.auth.uid
+      );
+      allow write: if isOwner();
+    }
+
+    // ─── 5. RENT PAYMENT RECORDS & INSTALLMENTS ─────────────────────────
+    match /paymentRecords/{recordId} {
+      allow read: if isSignedIn() && (
+        isOwner() || 
+        resource.data.renterId == myRenterId() || 
+        resource.data.renterId == request.auth.uid
+      );
+
+      allow create: if isSignedIn() && (
+        isOwner() || 
+        request.resource.data.renterId == myRenterId() || 
+        request.resource.data.renterId == request.auth.uid
+      );
+
+      allow update: if isSignedIn() && (
+        isOwner() || 
+        resource.data.renterId == myRenterId() || 
+        resource.data.renterId == request.auth.uid
+      );
+
+      allow delete: if isOwner();
+    }
+
+    // ─── 6. MAINTENANCE TICKETS ─────────────────────────────────────────
+    match /maintenanceRequests/{id} {
+      allow read: if isSignedIn() && (
+        isOwner() || 
+        resource.data.renterId == myRenterId() || 
+        resource.data.renterId == request.auth.uid || 
+        resource.data.renterUid == request.auth.uid
+      );
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && (
+        isOwner() || 
+        resource.data.renterId == myRenterId() || 
+        resource.data.renterId == request.auth.uid || 
+        resource.data.renterUid == request.auth.uid
+      );
+      allow delete: if isOwner();
+    }
+
+    // ─── 7. ANNOUNCEMENTS & NOTICES ─────────────────────────────────────
+    match /notices/{id} {
+      allow read: if isSignedIn();
+      allow write: if isOwner();
+    }
+
+    // ─── 8. UTILITY BILLS (Electricity & Water Sub-Meters) ──────────────
+    match /utilityBills/{id} {
+      allow read: if isSignedIn() && (
+        isOwner() || 
+        resource.data.renterId == myRenterId() || 
+        resource.data.renterId == request.auth.uid || 
+        resource.data.renterUid == request.auth.uid
+      );
+      allow write: if isOwner();
+    }
+
+    // ─── 9. GATE PASSES (Visitor & Tenant Digital Passes) ───────────────
+    match /gatePasses/{id} {
+      allow read: if isSignedIn() && (
+        isOwner() || 
+        resource.data.renterId == myRenterId() || 
+        resource.data.renterId == request.auth.uid || 
+        resource.data.renterUid == request.auth.uid
+      );
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && (
+        isOwner() || 
+        resource.data.renterId == myRenterId() || 
+        resource.data.renterId == request.auth.uid || 
+        resource.data.renterUid == request.auth.uid
+      );
+      allow delete: if isOwner();
+    }
+
+    // ─── 10. VISITOR LOGS (Entry & Exit Tracking) ────────────────────────
+    match /visitorLogs/{id} {
+      allow read: if isSignedIn() && (
+        isOwner() || 
+        resource.data.renterId == myRenterId() || 
+        resource.data.renterId == request.auth.uid || 
+        resource.data.renterUid == request.auth.uid
+      );
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && (
+        isOwner() || 
+        resource.data.renterId == myRenterId() || 
+        resource.data.renterId == request.auth.uid || 
+        resource.data.renterUid == request.auth.uid
+      );
+      allow delete: if isOwner();
+    }
+
+    // ─── 11. MESS & CANTEEN MENUS ────────────────────────────────────────
+    match /messMenus/{id} {
+      allow read: if isSignedIn();
+      allow write: if isOwner();
+    }
+
+    // ─── 12. NOTIFICATIONS & ALERTS ──────────────────────────────────────
+    match /notifications/{id} {
+      allow read, update, delete: if isSignedIn() && (
+        isOwner() || 
+        resource.data.toUid == request.auth.uid
+      );
+      allow create: if isSignedIn();
+    }
+
+    // ─── 13. APP VERSION & AUTO-UPDATES (Public read for launch check) ───
+    match /appVersions/{appId} {
+      allow read: if true;
+      allow write: if isOwner();
+    }
+  }
+}
