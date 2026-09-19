@@ -1,392 +1,530 @@
-# Rentlyo
+<div align="center">
 
-### The complete white-label property management suite for owners, managers, and tenants
+<img src="assets/rentlyo-hor.png" alt="Rentlyo" width="400">
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter&logoColor=white)](https://flutter.dev/)
-[![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?logo=dart&logoColor=white)](https://dart.dev/)
-[![Firebase](https://img.shields.io/badge/Firebase-Firestore%20%7C%20Auth%20%7C%20Messaging-FFCA28?logo=firebase&logoColor=111827)](https://firebase.google.com/)
-[![Platform](https://img.shields.io/badge/Platform-Android-3DDC84?logo=android&logoColor=white)](https://www.android.com/)
-[![License](https://img.shields.io/badge/License-Private%20%2F%20Proprietary-374151)](#license)
+<br><br>
 
-<p align="center">
-  <img src="assets/rentlyo-hor.png" alt="Rentlyo logo" width="360">
-</p>
+**Complete White-Label Property Management Suite**
+<br>
+*Leases, ledgers, tenants, and properties in one synchronized workspace.*
 
-<p align="center">
-  <strong>Leases, ledgers, tenants, and properties in one living workspace.</strong><br>
-  <sub>Built for commercial spaces, residential communities, and mixed-use properties.</sub>
-</p>
+<br>
 
-Rentlyo is a complete, configurable property-management ecosystem built with Flutter and Firebase. It combines a tenant-facing mobile application, an owner and property-manager console, a shared real-time financial model, secure Firestore rules, and a one-click white-label deployment engine.
+[![Flutter](https://img.shields.io/badge/Flutter-3.x-0097A7?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev/)
+[![Dart](https://img.shields.io/badge/Dart-3.x-00838F?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev/)
+[![Firebase](https://img.shields.io/badge/Firebase-Backend-00695C?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
+[![Platform](https://img.shields.io/badge/Platform-Android-26A69A?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com/)
+[![License](https://img.shields.io/badge/License-Proprietary-37474F?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTAgMThjLTQuNDEgMC04LTMuNTktOC04czMuNTktOCA4LTggOCAzLjU5IDggOC0zLjU5IDgtOCA4eiIvPjxwYXRoIGQ9Ik0xMiA2Yy0zLjMxIDAtNiAyLjY5LTYgNnMyLjY5IDYgNiA2IDYtMi42OSA2LTYtMi42OS02LTYtNnoiLz48L3N2Zz4=&logoColor=white)](#license)
 
-It is designed for commercial shops, residential flats, rooms, beds, and mixed-use properties where owners need reliable rent operations and tenants need a clear, trustworthy lease portal.
+<br>
+
+[Get Started](#-quick-start) · [Architecture](#-system-architecture) · [Deploy a Client](#-client-onboarding--white-label-setup) · [Website](https://rentlyo.cscouncil.in/)
+
+<br>
+
+---
+
+</div>
+
+<br>
+
+## The Rentlyo Ecosystem
 
 > **One platform. Two focused apps. One synchronized property workspace.**
-
-<p align="center">
-  <a href="#quick-start">Get Started</a> &nbsp; | &nbsp;
-  <a href="#client-onboarding-and-white-label-setup">Deploy a Client</a> &nbsp; | &nbsp;
-  <a href="#system-architecture">Explore the Architecture</a>
-</p>
-
-### The Rentlyo loop
+>
+> Built for commercial shops, residential flats, rooms, beds, and mixed-use properties where owners need reliable rent operations and tenants need a clear, trustworthy lease portal.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#00838F', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#006064', 'lineColor': '#00ACC1', 'secondaryColor': '#E0F7FA', 'tertiaryColor': '#B2EBF2', 'fontSize': '14px'}}}%%
 flowchart LR
-    A[Configure a property] --> B[Create units]
-    B --> C[Build a lease deal]
-    C --> D[Onboard a tenant]
-    D --> E[Track rent and utilities]
-    E --> F[Reconcile payments]
-    F --> G[Report and notify]
-    G --> E
+    A["<b>Configure</b><br/>Property Setup"] --> B["<b>Create</b><br/>Unit Inventory"]
+    B --> C["<b>Build</b><br/>Lease Deal"]
+    C --> D["<b>Onboard</b><br/>Tenant"]
+    D --> E["<b>Track</b><br/>Rent & Utilities"]
+    E --> F["<b>Reconcile</b><br/>Payments"]
+    F --> G["<b>Report</b><br/>Notify & Audit"]
+    G -.->|"Continuous<br/>Cycle"| E
 
-    classDef action fill:#044040,color:#ffffff,stroke:#C58B2B,stroke-width:2px;
-    classDef outcome fill:#F8FAF9,color:#044040,stroke:#044040,stroke-width:2px;
-    class A,B,C,D action;
-    class E,F,G outcome;
+    style A fill:#006064,color:#FFFFFF,stroke:#004D40,stroke-width:2px
+    style B fill:#00838F,color:#FFFFFF,stroke:#006064,stroke-width:2px
+    style C fill:#0097A7,color:#FFFFFF,stroke:#00838F,stroke-width:2px
+    style D fill:#00ACC1,color:#FFFFFF,stroke:#0097A7,stroke-width:2px
+    style E fill:#00BCD4,color:#004D40,stroke:#00ACC1,stroke-width:2px
+    style F fill:#26C6DA,color:#004D40,stroke:#00BCD4,stroke-width:2px
+    style G fill:#4DD0E1,color:#004D40,stroke:#26C6DA,stroke-width:2px
 ```
 
----
-
-## Contents
-
-- [What Rentlyo Includes](#what-rentlyo-includes)
-- [Why It Is Different](#why-it-is-different)
-- [Product Capabilities](#product-capabilities)
-- [System Architecture](#system-architecture)
-- [Repository Layout](#repository-layout)
-- [Technology Stack](#technology-stack)
-- [Requirements](#requirements)
-- [Quick Start](#quick-start)
-- [Client Onboarding and White-Label Setup](#client-onboarding-and-white-label-setup)
-- [Firebase Setup](#firebase-setup)
-- [Application Workflows](#application-workflows)
-- [Financial and Operational Engines](#financial-and-operational-engines)
-- [Security Model](#security-model)
-- [Build and Release](#build-and-release)
-- [In-App Updates](#in-app-updates)
-- [Database Operations](#database-operations)
-- [Testing](#testing)
-- [Troubleshooting](#troubleshooting)
-- [Production Checklist](#production-checklist)
-- [Documentation](#documentation)
-- [License](#license)
+<br>
 
 ---
 
-## What Rentlyo Includes
-
-### 1. Rentlyo Tenant App
-
-A private lease and rent companion for renters, shopkeepers, and residential occupants.
-
-- Live dashboard with current dues and advance balance
-- Agreement and deal summary in plain language
-- Rent schedules with step-up tiers
-- Full payment and installment ledger
-- Partial-payment and advance-adjustment tracking
-- Payment reporting for cash, UPI, and installments
-- One-tap UPI payment handoff to supported payment apps
-- Payment receipt generation and WhatsApp sharing
-- Utility bill and sub-meter history
-- Digital gate passes and visitor-related workflows
-- Property notices and announcements
-- Push notifications and local rent reminders
-- Secure PIN unlock and protected local storage
-- In-app release update notifications
-
-### 2. Rentlyo Admin Console
-
-A focused operating console for property owners, managers, and accounting staff.
-
-- Dashboard occupancy and vacancy overview
-- Commercial and residential unit management
-- Multi-unit deal creation and consolidation
-- Tenant onboarding wizard
-- Lease start dates, monthly rent, and escalation tiers
-- Advance deposit and security management
-- Advance top-ups with dates, amounts, and owner remarks
-- Automatic ledger rebalancing after financial changes
-- Payment confirmation and installment review
-- Maintenance request management
-- Electricity and water sub-meter billing
-- Notices, announcements, and tenant communication
-- Visitor logs and digital gate-pass administration
-- Multi-property context switching
-- Tenant credential generation without ending the admin session
-- PDF statements, CSV exports, and Excel-compatible reporting
-- Owner PIN authentication and secure local session handling
-- App version publishing and OTA release management
-
-### 3. White-Label Deployment Engine
-
-A reusable deployment layer for preparing the same product for a new property, brand, or client.
-
-- Central `client_config.json` configuration
-- Automatic Firebase project and API-key discovery from `google-services.json`
-- Brand name, app name, taglines, colors, contact details, UPI, and property identity
-- Client logo and optional banner distribution
-- Android package-name and app-label synchronization
-- Adaptive launcher icon generation
-- Native splash-screen generation
-- Firebase owner-account bootstrap
-- Firestore seed and verification workflow
-- Pre-flight diagnostics
-- Release APK compilation for both applications
-- Database cleaning utility for test environments
+## Table of Contents
 
 <table>
 <tr>
-<td width="33%" valign="top">
+<td width="50%" valign="top">
 
-#### For owners
+#### Platform
+- [The Rentlyo Ecosystem](#the-rentlyo-ecosystem)
+- [What Rentlyo Includes](#-what-rentlyo-includes)
+- [Why It Is Different](#-why-it-is-different)
+- [Product Capabilities](#-product-capabilities)
 
-Manage inventory, deals, deposits, payments, utilities, notices, and reports from one focused console.
+#### Architecture
+- [System Architecture](#-system-architecture)
+- [Technology Stack](#-technology-stack)
+- [Repository Layout](#-repository-layout)
+- [Security Model](#-security-model)
 
 </td>
-<td width="33%" valign="top">
+<td width="50%" valign="top">
 
-#### For tenants
+#### Operations
+- [Quick Start](#-quick-start)
+- [Client Onboarding & White-Label Setup](#-client-onboarding--white-label-setup)
+- [Firebase Setup](#-firebase-setup)
+- [Application Workflows](#-application-workflows)
 
-See the lease, understand the balance, pay rent, report payments, receive notices, and access everyday property tools.
-
-</td>
-<td width="33%" valign="top">
-
-#### For operators
-
-Clone the platform for a new client with centralized configuration, branded assets, Firebase bootstrap, and release automation.
+#### Engineering
+- [Financial & Operational Engines](#-financial--operational-engines)
+- [Build & Release](#-build--release)
+- [Testing](#-testing)
+- [Production Checklist](#-production-checklist)
+- [Troubleshooting](#-troubleshooting)
 
 </td>
 </tr>
 </table>
 
+<br>
+
+---
+
+## What Rentlyo Includes
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+### Tenant App
+
+*Private lease and rent companion for renters, shopkeepers, and residential occupants.*
+
+| Feature | |
+|:---|:---:|
+| Live dashboard with current dues | ![check](https://img.shields.io/badge/-%E2%9C%93-00BCD4?style=flat-square) |
+| Agreement and deal summary | ![check](https://img.shields.io/badge/-%E2%9C%93-00BCD4?style=flat-square) |
+| Rent schedules with step-up tiers | ![check](https://img.shields.io/badge/-%E2%9C%93-00BCD4?style=flat-square) |
+| Full payment and installment ledger | ![check](https://img.shields.io/badge/-%E2%9C%93-00BCD4?style=flat-square) |
+| Partial-payment & advance tracking | ![check](https://img.shields.io/badge/-%E2%9C%93-00BCD4?style=flat-square) |
+| One-tap UPI payment handoff | ![check](https://img.shields.io/badge/-%E2%9C%93-00BCD4?style=flat-square) |
+| Payment receipt via WhatsApp | ![check](https://img.shields.io/badge/-%E2%9C%93-00BCD4?style=flat-square) |
+| Utility bill & sub-meter history | ![check](https://img.shields.io/badge/-%E2%9C%93-00BCD4?style=flat-square) |
+| Digital gate passes | ![check](https://img.shields.io/badge/-%E2%9C%93-00BCD4?style=flat-square) |
+| Push notifications & reminders | ![check](https://img.shields.io/badge/-%E2%9C%93-00BCD4?style=flat-square) |
+| Secure PIN unlock | ![check](https://img.shields.io/badge/-%E2%9C%93-00BCD4?style=flat-square) |
+| In-app update notifications | ![check](https://img.shields.io/badge/-%E2%9C%93-00BCD4?style=flat-square) |
+
+</td>
+<td width="33%" valign="top">
+
+### Admin Console
+
+*Focused operating console for property owners, managers, and accounting staff.*
+
+| Feature | |
+|:---|:---:|
+| Dashboard occupancy overview | ![check](https://img.shields.io/badge/-%E2%9C%93-00838F?style=flat-square) |
+| Commercial & residential units | ![check](https://img.shields.io/badge/-%E2%9C%93-00838F?style=flat-square) |
+| Multi-unit deal creation | ![check](https://img.shields.io/badge/-%E2%9C%93-00838F?style=flat-square) |
+| Tenant onboarding wizard | ![check](https://img.shields.io/badge/-%E2%9C%93-00838F?style=flat-square) |
+| Lease & escalation tiers | ![check](https://img.shields.io/badge/-%E2%9C%93-00838F?style=flat-square) |
+| Advance deposit management | ![check](https://img.shields.io/badge/-%E2%9C%93-00838F?style=flat-square) |
+| Auto ledger rebalancing | ![check](https://img.shields.io/badge/-%E2%9C%93-00838F?style=flat-square) |
+| Electricity & water billing | ![check](https://img.shields.io/badge/-%E2%9C%93-00838F?style=flat-square) |
+| PDF, CSV, and Excel reports | ![check](https://img.shields.io/badge/-%E2%9C%93-00838F?style=flat-square) |
+| Multi-property switching | ![check](https://img.shields.io/badge/-%E2%9C%93-00838F?style=flat-square) |
+| OTA release management | ![check](https://img.shields.io/badge/-%E2%9C%93-00838F?style=flat-square) |
+| Owner PIN authentication | ![check](https://img.shields.io/badge/-%E2%9C%93-00838F?style=flat-square) |
+
+</td>
+<td width="33%" valign="top">
+
+### White-Label Engine
+
+*Reusable deployment layer for new properties, brands, or clients.*
+
+| Feature | |
+|:---|:---:|
+| Central `client_config.json` | ![check](https://img.shields.io/badge/-%E2%9C%93-006064?style=flat-square) |
+| Auto Firebase project discovery | ![check](https://img.shields.io/badge/-%E2%9C%93-006064?style=flat-square) |
+| Brand name, colors, contacts | ![check](https://img.shields.io/badge/-%E2%9C%93-006064?style=flat-square) |
+| Client logo & banner distribution | ![check](https://img.shields.io/badge/-%E2%9C%93-006064?style=flat-square) |
+| Android package synchronization | ![check](https://img.shields.io/badge/-%E2%9C%93-006064?style=flat-square) |
+| Adaptive icon generation | ![check](https://img.shields.io/badge/-%E2%9C%93-006064?style=flat-square) |
+| Native splash screen generation | ![check](https://img.shields.io/badge/-%E2%9C%93-006064?style=flat-square) |
+| Firebase owner bootstrap | ![check](https://img.shields.io/badge/-%E2%9C%93-006064?style=flat-square) |
+| Firestore seed & verification | ![check](https://img.shields.io/badge/-%E2%9C%93-006064?style=flat-square) |
+| Pre-flight diagnostics | ![check](https://img.shields.io/badge/-%E2%9C%93-006064?style=flat-square) |
+| Dual release APK compilation | ![check](https://img.shields.io/badge/-%E2%9C%93-006064?style=flat-square) |
+| Database cleaning utility | ![check](https://img.shields.io/badge/-%E2%9C%93-006064?style=flat-square) |
+
+</td>
+</tr>
+</table>
+
+<br>
+
 ---
 
 ## Why It Is Different
 
-### Built around the real rent lifecycle
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#00838F', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#006064', 'lineColor': '#00ACC1', 'secondaryColor': '#E0F7FA', 'tertiaryColor': '#B2EBF2'}}}%%
+mindmap
+  root((Rentlyo))
+    Real Rent Lifecycle
+      Not disconnected screens
+      Two views of one ledger
+      Complete operational model
+    Real-Time by Default
+      Firestore streams
+      Instant synchronization
+      Live balance updates
+    White-Label Ready
+      Configuration-driven
+      One workspace, many clients
+      Branded app generation
+    Mixed-Use Properties
+      Commercial and residential
+      Multi-unit consolidation
+      Isolated unit types
+    Financial Clarity
+      Advance consumption
+      Partial payment carryover
+      Automatic reconciliation
+```
 
-Rentlyo models the relationship between a property, its units, a lease deal, a tenant, an advance balance, monthly rent, payment records, utilities, and notices. The apps are not disconnected screens; they are two views of the same operational ledger.
+<details>
+<summary><b>Built around the real rent lifecycle</b></summary>
+<br>
 
-### Real-time by default
+Rentlyo models the relationship between a property, its units, a lease deal, a tenant, an advance balance, monthly rent, payment records, utilities, and notices. The apps are not disconnected screens; they are **two views of the same operational ledger**.
 
-Firestore streams keep deal information, advance top-ups, notices, payment states, and property branding synchronized between the admin and tenant experiences.
+</details>
 
-### White-label at the configuration layer
+<details>
+<summary><b>Real-time by default</b></summary>
+<br>
 
-A new client can receive branded applications without rebuilding the product architecture from scratch. The setup engine distributes assets, rewrites generated configuration, prepares Firebase connectivity, and can build both release APKs from one workspace.
+Firestore streams keep deal information, advance top-ups, notices, payment states, and property branding synchronized between the admin and tenant experiences. Changes propagate instantly without manual refresh.
 
-### Designed for mixed-use properties
+</details>
+
+<details>
+<summary><b>White-label at the configuration layer</b></summary>
+<br>
+
+A new client can receive branded applications **without rebuilding the product architecture**. The setup engine distributes assets, rewrites generated configuration, prepares Firebase connectivity, and can build both release APKs from one workspace.
+
+</details>
+
+<details>
+<summary><b>Designed for mixed-use properties</b></summary>
+<br>
 
 Commercial and residential inventory can coexist while remaining separated during onboarding and vacancy selection. Multi-unit deals can be consolidated without losing unit-level occupancy state.
 
-### Financial clarity over manual arithmetic
+</details>
+
+<details>
+<summary><b>Financial clarity over manual arithmetic</b></summary>
+<br>
 
 The shared rent engine handles advance consumption, partial payments, overdue carryover, rent escalations, and payment status reconciliation so owners and tenants see the same outcome.
+
+</details>
+
+<br>
 
 ---
 
 ## Product Capabilities
 
-| Area | Tenant App | Admin Console |
-| --- | :---: | :---: |
-| Live rent balance | Yes | Yes |
-| Lease and deal terms | Yes | Yes |
-| Advance balance and top-ups | View | Manage |
-| Payment ledger | View and report | Review and confirm |
-| Rent escalation tiers | View | Configure |
-| Unit inventory | View context | Manage |
-| Tenant onboarding | No | Yes |
-| Maintenance requests | Create and track | Manage |
-| Utility billing | View history | Calculate and publish |
-| Notices and announcements | Read | Create and manage |
-| Gate passes and visitor logs | Use | Manage |
-| Multi-property switching | Contextual | Yes |
-| PDF/CSV/Excel reporting | No | Yes |
-| Release update management | Receive | Publish |
+<table>
+<tr>
+<th align="left">Capability</th>
+<th align="center">Tenant App</th>
+<th align="center">Admin Console</th>
+</tr>
+<tr><td><b>Live rent balance</b></td><td align="center"><img src="https://img.shields.io/badge/-View-00BCD4?style=flat-square" alt="View"></td><td align="center"><img src="https://img.shields.io/badge/-View-00838F?style=flat-square" alt="View"></td></tr>
+<tr><td><b>Lease and deal terms</b></td><td align="center"><img src="https://img.shields.io/badge/-View-00BCD4?style=flat-square" alt="View"></td><td align="center"><img src="https://img.shields.io/badge/-Manage-00838F?style=flat-square" alt="Manage"></td></tr>
+<tr><td><b>Advance balance and top-ups</b></td><td align="center"><img src="https://img.shields.io/badge/-View-00BCD4?style=flat-square" alt="View"></td><td align="center"><img src="https://img.shields.io/badge/-Manage-00838F?style=flat-square" alt="Manage"></td></tr>
+<tr><td><b>Payment ledger</b></td><td align="center"><img src="https://img.shields.io/badge/-View%20%26%20Report-00BCD4?style=flat-square" alt="View & Report"></td><td align="center"><img src="https://img.shields.io/badge/-Review%20%26%20Confirm-00838F?style=flat-square" alt="Review & Confirm"></td></tr>
+<tr><td><b>Rent escalation tiers</b></td><td align="center"><img src="https://img.shields.io/badge/-View-00BCD4?style=flat-square" alt="View"></td><td align="center"><img src="https://img.shields.io/badge/-Configure-00838F?style=flat-square" alt="Configure"></td></tr>
+<tr><td><b>Unit inventory</b></td><td align="center"><img src="https://img.shields.io/badge/-Context-00BCD4?style=flat-square" alt="Context"></td><td align="center"><img src="https://img.shields.io/badge/-Manage-00838F?style=flat-square" alt="Manage"></td></tr>
+<tr><td><b>Tenant onboarding</b></td><td align="center"><img src="https://img.shields.io/badge/-%E2%80%94-546E7A?style=flat-square" alt="N/A"></td><td align="center"><img src="https://img.shields.io/badge/-Wizard-00838F?style=flat-square" alt="Wizard"></td></tr>
+<tr><td><b>Maintenance requests</b></td><td align="center"><img src="https://img.shields.io/badge/-Create%20%26%20Track-00BCD4?style=flat-square" alt="Create & Track"></td><td align="center"><img src="https://img.shields.io/badge/-Manage-00838F?style=flat-square" alt="Manage"></td></tr>
+<tr><td><b>Utility billing</b></td><td align="center"><img src="https://img.shields.io/badge/-View%20History-00BCD4?style=flat-square" alt="View History"></td><td align="center"><img src="https://img.shields.io/badge/-Calculate%20%26%20Publish-00838F?style=flat-square" alt="Calculate & Publish"></td></tr>
+<tr><td><b>Notices and announcements</b></td><td align="center"><img src="https://img.shields.io/badge/-Read-00BCD4?style=flat-square" alt="Read"></td><td align="center"><img src="https://img.shields.io/badge/-Create%20%26%20Manage-00838F?style=flat-square" alt="Create & Manage"></td></tr>
+<tr><td><b>Gate passes and visitor logs</b></td><td align="center"><img src="https://img.shields.io/badge/-Use-00BCD4?style=flat-square" alt="Use"></td><td align="center"><img src="https://img.shields.io/badge/-Manage-00838F?style=flat-square" alt="Manage"></td></tr>
+<tr><td><b>Multi-property switching</b></td><td align="center"><img src="https://img.shields.io/badge/-Contextual-00BCD4?style=flat-square" alt="Contextual"></td><td align="center"><img src="https://img.shields.io/badge/-Full%20Control-00838F?style=flat-square" alt="Full Control"></td></tr>
+<tr><td><b>PDF/CSV/Excel reporting</b></td><td align="center"><img src="https://img.shields.io/badge/-%E2%80%94-546E7A?style=flat-square" alt="N/A"></td><td align="center"><img src="https://img.shields.io/badge/-Export-00838F?style=flat-square" alt="Export"></td></tr>
+<tr><td><b>Release update management</b></td><td align="center"><img src="https://img.shields.io/badge/-Receive-00BCD4?style=flat-square" alt="Receive"></td><td align="center"><img src="https://img.shields.io/badge/-Publish-00838F?style=flat-square" alt="Publish"></td></tr>
+</table>
+
+<br>
 
 ---
 
 ## System Architecture
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#00838F', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#006064', 'lineColor': '#00ACC1', 'secondaryColor': '#E0F7FA', 'tertiaryColor': '#FFFFFF', 'fontSize': '14px'}}}%%
 flowchart TB
-  subgraph CLOUD[Firebase Cloud]
-    AUTH[Firebase Authentication]
-    DB[(Cloud Firestore)]
-    PUSH[Cloud Messaging]
-    RULES[Firestore Security Rules]
+  subgraph CLOUD["<b>Firebase Cloud</b>"]
+    direction LR
+    AUTH["Authentication<br/><sub>Phone + Email/Password</sub>"]
+    DB[("Cloud Firestore<br/><sub>Real-time Database</sub>")]
+    PUSH["Cloud Messaging<br/><sub>Push Notifications</sub>"]
+    RULES["Security Rules<br/><sub>Role-based Access</sub>"]
   end
 
-  subgraph APPS[Focused mobile experiences]
-    ADMIN[Rentlyo Admin<br/>Owner Console]
-    TENANT[Rentlyo<br/>Tenant Companion]
+  subgraph APPS["<b>Mobile Applications</b>"]
+    direction LR
+    ADMIN["Rentlyo Admin<br/><sub>Owner Console</sub>"]
+    TENANT["Rentlyo Tenant<br/><sub>Renter Companion</sub>"]
   end
 
-  subgraph OPS[White-label operations]
-    CONFIG[client_config.json]
-    SETUP[setup_client.dart]
-    RELEASE[Build and release tools]
+  subgraph OPS["<b>White-Label Operations</b>"]
+    direction LR
+    CONFIG["client_config.json<br/><sub>Brand Configuration</sub>"]
+    SETUP["setup_client.dart<br/><sub>Deployment Engine</sub>"]
+    RELEASE["Build Tools<br/><sub>APK Compilation</sub>"]
   end
 
-  ADMIN <--> AUTH
-  ADMIN <--> DB
-  ADMIN --> PUSH
-  TENANT <--> AUTH
-  TENANT <--> DB
-  TENANT --> PUSH
-  RULES -. protects .-> DB
+  ADMIN <-->|"Auth & Streams"| AUTH
+  ADMIN <-->|"Read / Write"| DB
+  ADMIN -->|"Send"| PUSH
+  TENANT <-->|"Auth & Streams"| AUTH
+  TENANT <-->|"Scoped Read / Write"| DB
+  PUSH -->|"Deliver"| TENANT
+  RULES -. "protects" .-> DB
   CONFIG --> SETUP
-  SETUP --> ADMIN
-  SETUP --> TENANT
-  RELEASE --> ADMIN
-  RELEASE --> TENANT
+  SETUP -->|"Configure"| ADMIN
+  SETUP -->|"Configure"| TENANT
+  RELEASE -->|"Build"| ADMIN
+  RELEASE -->|"Build"| TENANT
 
-  classDef cloud fill:#FFF7D6,color:#3D2B00,stroke:#C58B2B,stroke-width:2px;
-  classDef app fill:#044040,color:#ffffff,stroke:#C58B2B,stroke-width:2px;
-  classDef ops fill:#F8FAF9,color:#044040,stroke:#044040,stroke-width:2px;
-  class AUTH,DB,PUSH,RULES cloud;
-  class ADMIN,TENANT app;
-  class CONFIG,SETUP,RELEASE ops;
+  style CLOUD fill:#E0F7FA,color:#004D40,stroke:#00838F,stroke-width:2px
+  style APPS fill:#B2EBF2,color:#004D40,stroke:#00838F,stroke-width:2px
+  style OPS fill:#E0F2F1,color:#004D40,stroke:#00838F,stroke-width:2px
+  style AUTH fill:#00838F,color:#FFFFFF,stroke:#006064,stroke-width:2px
+  style DB fill:#006064,color:#FFFFFF,stroke:#004D40,stroke-width:2px
+  style PUSH fill:#0097A7,color:#FFFFFF,stroke:#00838F,stroke-width:2px
+  style RULES fill:#004D40,color:#FFFFFF,stroke:#00363D,stroke-width:2px
+  style ADMIN fill:#00ACC1,color:#FFFFFF,stroke:#0097A7,stroke-width:2px
+  style TENANT fill:#26C6DA,color:#004D40,stroke:#00ACC1,stroke-width:2px
+  style CONFIG fill:#80CBC4,color:#004D40,stroke:#4DB6AC,stroke-width:2px
+  style SETUP fill:#4DB6AC,color:#FFFFFF,stroke:#26A69A,stroke-width:2px
+  style RELEASE fill:#26A69A,color:#FFFFFF,stroke:#009688,stroke-width:2px
 ```
 
-### Data flow principles
-
-1. An owner creates properties, units, and lease deals in the Admin Console.
-2. Firestore stores the canonical operational state.
-3. The Tenant App reads only the tenant's permitted records through authenticated streams.
-4. Payment, advance, utility, notice, and occupancy changes appear in both apps in real time.
-5. Firestore rules enforce owner access and tenant ownership boundaries at the database layer.
-
-### From setup to synchronized apps
+<details>
+<summary><b>Data Flow Principles</b></summary>
+<br>
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#00838F', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#006064', 'lineColor': '#00ACC1', 'actorBkg': '#00838F', 'actorTextColor': '#FFFFFF', 'actorBorder': '#006064', 'activationBkgColor': '#E0F7FA', 'activationBorderColor': '#00838F', 'signalColor': '#00ACC1', 'fontSize': '14px'}}}%%
 sequenceDiagram
-  participant O as Owner
-  participant A as Admin App
-  participant F as Firebase
-  participant T as Tenant App
+    participant O as Owner
+    participant A as Admin Console
+    participant F as Firebase
+    participant T as Tenant App
 
-  O->>A: Create unit and lease deal
-  A->>F: Write deal, unit, and tenant records
-  F-->>A: Stream updated operational state
-  F-->>T: Stream tenant-authorized deal data
-  T->>F: Report payment or request maintenance
-  F-->>A: Notify owner of the new activity
-  A->>F: Confirm payment or publish notice
-  F-->>T: Refresh balance, status, and notification
+    rect rgba(0, 131, 143, 0.08)
+        Note over O,T: Property & Lease Setup
+        O->>A: Create unit and lease deal
+        A->>F: Write deal, unit, and tenant records
+        F-->>A: Stream updated operational state
+        F-->>T: Stream tenant-authorized deal data
+    end
+
+    rect rgba(0, 188, 212, 0.08)
+        Note over O,T: Payment Lifecycle
+        T->>F: Report payment or request maintenance
+        F-->>A: Notify owner of new activity
+        A->>F: Confirm payment or publish notice
+        F-->>T: Refresh balance, status, and notification
+    end
+
+    rect rgba(38, 198, 218, 0.08)
+        Note over O,T: Continuous Operations
+        O->>A: Manage advances, utilities, notices
+        A->>F: Update operational records
+        F-->>T: Real-time sync to tenant view
+    end
 ```
 
----
+**Five core principles drive the data flow:**
 
-## Repository Layout
+1. An owner creates properties, units, and lease deals in the Admin Console.
+2. Firestore stores the **canonical operational state**.
+3. The Tenant App reads only the tenant's permitted records through **authenticated streams**.
+4. Payment, advance, utility, notice, and occupancy changes appear in both apps **in real time**.
+5. Firestore rules enforce owner access and tenant ownership boundaries **at the database layer**.
 
-```text
-Rentlyo/
-├── Rentlyo/                         # Tenant-facing Flutter application
-│   ├── lib/
-│   │   ├── core/                    # App configuration and shared tenant services
-│   │   ├── models/                  # Tenant-side data models
-│   │   ├── screens/                 # Tenant experience screens
-│   │   ├── services/                # Firebase, ledger, notification, and update services
-│   │   └── widgets/                 # Reusable tenant UI components
-│   ├── assets/images/               # Tenant branding assets
-│   ├── android/                     # Android project and Firebase configuration
-│   ├── test/                        # Tenant tests
-│   └── pubspec.yaml                 # Tenant dependencies and app metadata
-│
-├── Rentlyo Admin/                   # Owner and property-manager Flutter application
-│   ├── lib/
-│   │   ├── core/                    # Admin configuration and shared services
-│   │   ├── models/                  # Admin-side data models
-│   │   ├── screens/                 # Admin workflows and dashboards
-│   │   ├── services/                # Firebase, reports, auth, ledger, and update services
-│   │   └── widgets/                 # Reusable admin UI components
-│   ├── assets/images/               # Admin branding assets
-│   ├── android/                     # Android project and Firebase configuration
-│   ├── test/                        # Admin tests
-│   └── pubspec.yaml                 # Admin dependencies and app metadata
-│
-├── scripts/                         # Dart automation and operations tools
-│   ├── setup_client.dart            # Client configuration and deployment engine
-│   ├── bootstrap_admin.dart         # Owner authentication and initial data bootstrap
-│   ├── clean_database.dart          # Controlled test-data purge utility
-│   └── update_version.dart          # Firestore-backed release publisher
-│
-├── client_assets/                   # Client-supplied logo and Firebase config
-├── assets/images/                   # Root-level shared image assets
-├── client_config.json               # White-label configuration source
-├── firestore.rules                  # Firestore authorization rules
-├── setup_new_client.bat             # Windows one-click launcher
-├── setup_new_client.ps1             # PowerShell launcher
-└── MASTER_PRODUCTION_AND_CLIENT_DEPLOYMENT_GUIDE.md
-```
+</details>
 
-> Build output folders such as `build/` and `.dart_tool/` are generated artifacts. Do not copy them into a new client workspace or commit them to source control.
+<br>
 
 ---
 
 ## Technology Stack
 
-### Client applications
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#00838F', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#006064', 'lineColor': '#00ACC1', 'secondaryColor': '#E0F7FA'}}}%%
+block-beta
+    columns 3
 
-- Flutter and Dart
-- Material Design
-- Firebase Core
-- Firebase Authentication
-- Cloud Firestore
-- Firebase Cloud Messaging
-- Local notifications
-- Secure local storage
-- Google Fonts
-- URL launching for UPI, WhatsApp, and external actions
-- PDF, CSV, and Excel-compatible report generation in the Admin Console
-- Android adaptive icons and native splash screens
+    block:CLIENT["Client Applications"]:3
+        columns 3
+        Flutter["Flutter 3.x"]
+        Dart["Dart 3.x"]
+        Material["Material Design"]
+        FCM["Cloud Messaging"]
+        LocalNoti["Local Notifications"]
+        SecStore["Secure Storage"]
+        Fonts["Google Fonts"]
+        URLLaunch["URL Launcher"]
+        Reports["PDF / CSV / Excel"]
+    end
 
-### Backend and operations
+    block:BACKEND["Backend & Infrastructure"]:3
+        columns 3
+        FBAuth["Firebase Auth"]
+        Firestore["Cloud Firestore"]
+        FBRules["Security Rules"]
+        PhoneMap["Phone-to-Email Mapping"]
+        Streams["Real-time Streams"]
+        APKHost["APK Hosting"]
+    end
 
-- Firebase Authentication with phone-number-to-pseudo-email mapping
-- Cloud Firestore real-time document and collection streams
-- Firestore Security Rules
-- Firebase Cloud Messaging notifications
-- GitHub-hosted or externally hosted APK release artifacts
-- Dart command-line automation scripts
-- Windows batch and PowerShell launchers
+    block:TOOLS["Operations & Tooling"]:3
+        columns 3
+        DartCLI["Dart CLI Scripts"]
+        WinPS["PowerShell Launchers"]
+        WinBat["Batch Launchers"]
+        Icons["Adaptive Icons"]
+        Splash["Native Splash"]
+        Config["JSON Configuration"]
+    end
 
-### Supported application targets
+    style CLIENT fill:#E0F7FA,color:#004D40,stroke:#00838F,stroke-width:2px
+    style BACKEND fill:#B2EBF2,color:#004D40,stroke:#00838F,stroke-width:2px
+    style TOOLS fill:#E0F2F1,color:#004D40,stroke:#00838F,stroke-width:2px
+    style Flutter fill:#00838F,color:#FFFFFF,stroke:#006064
+    style Dart fill:#0097A7,color:#FFFFFF,stroke:#00838F
+    style Material fill:#00ACC1,color:#FFFFFF,stroke:#0097A7
+    style FCM fill:#00BCD4,color:#004D40,stroke:#00ACC1
+    style LocalNoti fill:#26C6DA,color:#004D40,stroke:#00BCD4
+    style SecStore fill:#4DD0E1,color:#004D40,stroke:#26C6DA
+    style Fonts fill:#80DEEA,color:#004D40,stroke:#4DD0E1
+    style URLLaunch fill:#B2EBF2,color:#004D40,stroke:#80DEEA
+    style Reports fill:#E0F7FA,color:#004D40,stroke:#B2EBF2
+    style FBAuth fill:#006064,color:#FFFFFF,stroke:#004D40
+    style Firestore fill:#00838F,color:#FFFFFF,stroke:#006064
+    style FBRules fill:#0097A7,color:#FFFFFF,stroke:#00838F
+    style PhoneMap fill:#00ACC1,color:#FFFFFF,stroke:#0097A7
+    style Streams fill:#00BCD4,color:#004D40,stroke:#00ACC1
+    style APKHost fill:#26C6DA,color:#004D40,stroke:#00BCD4
+    style DartCLI fill:#004D40,color:#FFFFFF,stroke:#00363D
+    style WinPS fill:#00695C,color:#FFFFFF,stroke:#004D40
+    style WinBat fill:#00796B,color:#FFFFFF,stroke:#00695C
+    style Icons fill:#00897B,color:#FFFFFF,stroke:#00796B
+    style Splash fill:#009688,color:#FFFFFF,stroke:#00897B
+    style Config fill:#26A69A,color:#FFFFFF,stroke:#009688
+```
 
-The current release configuration is optimized for Android APK distribution. The Flutter projects can be developed with standard Flutter tooling, but platform-specific Firebase configuration, signing, and release validation must be completed before targeting additional platforms.
+> The current release configuration is optimized for **Android APK distribution**. The Flutter projects can target additional platforms with standard Flutter tooling, but platform-specific Firebase configuration, signing, and release validation must be completed first.
+
+<br>
 
 ---
 
-## Requirements
+## Repository Layout
 
-Install the following before starting:
-
-- Windows 10 or later for the provided `.bat` and PowerShell launchers
-- Flutter SDK with Dart 3.x
-- Android Studio and Android SDK for Android builds
-- A configured Android emulator or physical Android device for local runs
-- A Firebase project with Authentication and Cloud Firestore enabled
-- Git, recommended for source control and release management
-
-Verify the toolchain:
-
-```powershell
-flutter doctor
-flutter --version
- dart --version
+```
+Rentlyo/
+├── Rentlyo/                            Tenant-facing Flutter application
+│   ├── lib/
+│   │   ├── core/                       App configuration and shared services
+│   │   ├── models/                     Tenant-side data models
+│   │   ├── screens/                    Tenant experience screens
+│   │   ├── services/                   Firebase, ledger, notification, update services
+│   │   └── widgets/                    Reusable tenant UI components
+│   ├── assets/images/                  Tenant branding assets
+│   ├── android/                        Android project and Firebase configuration
+│   ├── test/                           Tenant tests
+│   └── pubspec.yaml                    Tenant dependencies
+│
+├── Rentlyo Admin/                      Owner and property-manager Flutter application
+│   ├── lib/
+│   │   ├── core/                       Admin configuration and shared services
+│   │   ├── models/                     Admin-side data models
+│   │   ├── screens/                    Admin workflows and dashboards
+│   │   ├── services/                   Firebase, reports, auth, ledger services
+│   │   └── widgets/                    Reusable admin UI components
+│   ├── assets/images/                  Admin branding assets
+│   ├── android/                        Android project and Firebase configuration
+│   ├── test/                           Admin tests
+│   └── pubspec.yaml                    Admin dependencies
+│
+├── scripts/                            Dart automation tools
+│   ├── setup_client.dart               Client deployment engine
+│   ├── bootstrap_admin.dart            Owner auth bootstrap
+│   ├── clean_database.dart             Test-data purge utility
+│   └── update_version.dart             Firestore-backed release publisher
+│
+├── client_assets/                      Client logo and Firebase config
+├── assets/                             Shared image assets and logos
+├── client_config.json                  White-label configuration source
+├── firestore.rules                     Firestore authorization rules
+├── setup_new_client.bat                Windows one-click launcher
+├── setup_new_client.ps1                PowerShell launcher
+└── MASTER_PRODUCTION_AND_CLIENT_DEPLOYMENT_GUIDE.md
 ```
 
-If `dart` is not available as a standalone command, the launchers can use the Dart runtime bundled with Flutter.
+> Build output folders such as `build/` and `.dart_tool/` are generated artifacts. Do not copy them into a new client workspace or commit them to source control.
+
+<br>
 
 ---
 
 ## Quick Start
 
-### 1. Fetch dependencies
+### Prerequisites
+
+| Requirement | Version |
+|:---|:---|
+| ![Windows](https://img.shields.io/badge/Windows-10+-0097A7?style=flat-square&logo=windows&logoColor=white) | 10 or later |
+| ![Flutter](https://img.shields.io/badge/Flutter-3.x-00838F?style=flat-square&logo=flutter&logoColor=white) | SDK with Dart 3.x |
+| ![Android](https://img.shields.io/badge/Android_Studio-Latest-006064?style=flat-square&logo=androidstudio&logoColor=white) | Android Studio + SDK |
+| ![Firebase](https://img.shields.io/badge/Firebase-Project-004D40?style=flat-square&logo=firebase&logoColor=white) | Auth + Firestore enabled |
+| ![Git](https://img.shields.io/badge/Git-Recommended-37474F?style=flat-square&logo=git&logoColor=white) | For source control |
+
+**Verify the toolchain:**
+
+```powershell
+flutter doctor
+flutter --version
+dart --version
+```
+
+### Step-by-Step
+
+<details>
+<summary><b>1. Fetch dependencies</b></summary>
 
 ```powershell
 cd "Rentlyo"
@@ -396,91 +534,147 @@ cd "..\Rentlyo Admin"
 flutter pub get
 ```
 
-### 2. Configure Firebase
+</details>
+
+<details>
+<summary><b>2. Configure Firebase</b></summary>
 
 Place the correct Firebase Android configuration in each app's Android module, or place a source copy at:
 
-```text
+```
 client_assets/google-services.json
 ```
 
 The deployment tooling can distribute the Firebase configuration to both applications.
 
-### 3. Run the apps
+</details>
 
-Tenant application:
+<details>
+<summary><b>3. Run the apps</b></summary>
 
+**Tenant application:**
 ```powershell
 cd "Rentlyo"
 flutter run
 ```
 
-Admin application:
-
+**Admin application:**
 ```powershell
 cd "..\Rentlyo Admin"
 flutter run
 ```
 
-### 4. Run tests
+</details>
+
+<details>
+<summary><b>4. Run tests</b></summary>
 
 ```powershell
-cd "..\Rentlyo"
+cd "Rentlyo"
 flutter test
 
 cd "..\Rentlyo Admin"
 flutter test
 ```
 
-For the complete client setup flow, use the root-level launcher described below.
+</details>
+
+<br>
 
 ---
 
-## Client Onboarding and White-Label Setup
+## Client Onboarding & White-Label Setup
 
 Rentlyo is structured so a new client or property can be prepared from one workspace.
 
-### Required client inputs
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#00838F', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#006064', 'lineColor': '#00ACC1', 'fontSize': '14px'}}}%%
+flowchart LR
+    subgraph INPUT["<b>Client Inputs</b>"]
+        direction TB
+        GS["google-services.json"]
+        LOGO["logo.png"]
+        BANNER["banner.png<br/><sub>optional</sub>"]
+        CFG["client_config.json"]
+    end
+
+    subgraph ENGINE["<b>Setup Engine</b>"]
+        direction TB
+        DETECT["Detect Firebase Project"]
+        DIST["Distribute Assets"]
+        BRAND["Apply Branding"]
+        PKG["Update Package IDs"]
+        ICON["Generate Icons & Splash"]
+        BOOT["Bootstrap Owner"]
+        SEED["Seed Firestore"]
+    end
+
+    subgraph OUTPUT["<b>Deliverables</b>"]
+        direction TB
+        APK_A["Admin APK"]
+        APK_T["Tenant APK"]
+        FB["Live Firebase Backend"]
+    end
+
+    INPUT --> ENGINE --> OUTPUT
+
+    style INPUT fill:#E0F7FA,color:#004D40,stroke:#00838F,stroke-width:2px
+    style ENGINE fill:#B2EBF2,color:#004D40,stroke:#00838F,stroke-width:2px
+    style OUTPUT fill:#E0F2F1,color:#004D40,stroke:#00838F,stroke-width:2px
+    style GS fill:#00838F,color:#FFFFFF,stroke:#006064
+    style LOGO fill:#0097A7,color:#FFFFFF,stroke:#00838F
+    style BANNER fill:#00ACC1,color:#FFFFFF,stroke:#0097A7
+    style CFG fill:#00BCD4,color:#004D40,stroke:#00ACC1
+    style DETECT fill:#006064,color:#FFFFFF,stroke:#004D40
+    style DIST fill:#00838F,color:#FFFFFF,stroke:#006064
+    style BRAND fill:#0097A7,color:#FFFFFF,stroke:#00838F
+    style PKG fill:#00ACC1,color:#FFFFFF,stroke:#0097A7
+    style ICON fill:#00BCD4,color:#004D40,stroke:#00ACC1
+    style BOOT fill:#26C6DA,color:#004D40,stroke:#00BCD4
+    style SEED fill:#4DD0E1,color:#004D40,stroke:#26C6DA
+    style APK_A fill:#00838F,color:#FFFFFF,stroke:#006064
+    style APK_T fill:#0097A7,color:#FFFFFF,stroke:#00838F
+    style FB fill:#006064,color:#FFFFFF,stroke:#004D40
+```
+
+<details>
+<summary><b>Required client inputs</b></summary>
+<br>
 
 Place the following in `client_assets/`:
 
-```text
+```
 client_assets/
 ├── google-services.json     # Firebase Android configuration
-├── logo.png                # Square client logo
-└── banner.png              # Optional property banner
+├── logo.png                 # Square client logo
+└── banner.png               # Optional property banner
 ```
 
 Update `client_config.json` with the new client's:
-
 - Property and brand identity
 - App names and taglines
 - Address and support contacts
 - Owner UPI ID
 - Primary, secondary, accent, and background colors
-- Firebase project settings where needed
+- Firebase project settings
 - Default property ID and currency
 - Owner bootstrap phone and initial password
 - Android package identifiers
 
-### One-click launcher
+</details>
 
-From the repository root, run:
+<details>
+<summary><b>Launcher operations</b></summary>
+<br>
+
+From the repository root:
 
 ```powershell
 .\setup_new_client.ps1
 ```
 
-Or double-click:
-
-```text
-setup_new_client.bat
-```
-
-The launcher provides these operations:
-
 | Option | Operation |
-| --- | --- |
+|:---:|:---|
 | `1` | Complete client setup, asset distribution, branding, Firebase bootstrap |
 | `2` | Complete setup and build both release APKs |
 | `3` | Pre-flight diagnostics and health check |
@@ -488,42 +682,39 @@ The launcher provides these operations:
 | `5` | Clean or reset test data while retaining the owner account |
 | `6` | Exit |
 
-The underlying Dart commands are also available directly:
+</details>
+
+<details>
+<summary><b>Direct Dart commands</b></summary>
+<br>
 
 ```powershell
 # Complete setup
- dart scripts/setup_client.dart
+dart scripts/setup_client.dart
 
 # Complete setup plus both release APKs
- dart scripts/setup_client.dart --all
+dart scripts/setup_client.dart --all
 
 # Verify keys, assets, package identifiers, and connectivity
- dart scripts/setup_client.dart --verify
+dart scripts/setup_client.dart --verify
 
 # Configure a client interactively
- dart scripts/setup_client.dart --interactive
+dart scripts/setup_client.dart --interactive
 ```
 
-The setup engine can:
-
-- Detect Firebase project details from `google-services.json`
-- Copy Firebase configuration into both apps
-- Distribute logos and banners
-- Rewrite generated app configuration
-- Apply client branding and contact information
-- Update Android package IDs and labels
-- Generate launcher icons and splash screens
-- Bootstrap the initial owner account
-- Seed or verify the initial Firestore property state
-- Build release APKs when requested
+</details>
 
 For the full operational walkthrough, read [MASTER_PRODUCTION_AND_CLIENT_DEPLOYMENT_GUIDE.md](MASTER_PRODUCTION_AND_CLIENT_DEPLOYMENT_GUIDE.md).
+
+<br>
 
 ---
 
 ## Firebase Setup
 
-For a fresh client backend:
+<details>
+<summary><b>Fresh client backend setup</b></summary>
+<br>
 
 1. Create a Firebase project.
 2. Enable Email/Password authentication.
@@ -533,20 +724,74 @@ For a fresh client backend:
 6. Download `google-services.json`.
 7. Place it in `client_assets/` and run the verification or setup command.
 
-### Authentication model
+</details>
+
+<details>
+<summary><b>Authentication model</b></summary>
+<br>
 
 Rentlyo uses an internal pseudo-email mapping so users can sign in with a mobile number and password while using Firebase Email/Password authentication:
 
-```text
-9876543210 -> 9876543210@rentlyo.local
+```
+9876543210  -->  9876543210@rentlyo.local
 ```
 
 The mapping is an implementation detail. The user experience remains a mobile-number login, while Firebase handles authentication and token issuance.
 
-### Core Firestore collections
+</details>
+
+<details>
+<summary><b>Core Firestore collections</b></summary>
+<br>
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#00838F', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#006064', 'lineColor': '#00ACC1', 'fontSize': '13px'}}}%%
+erDiagram
+    USERS ||--o{ DEALS : "linked via renter"
+    PROPERTIES ||--o{ UNITS : contains
+    UNITS ||--o{ DEALS : "leased through"
+    DEALS ||--o{ PAYMENT_RECORDS : generates
+    DEALS ||--o{ UTILITY_BILLS : incurs
+    PROPERTIES ||--o{ NOTICES : publishes
+    USERS ||--o{ MAINTENANCE_REQUESTS : creates
+    USERS ||--o{ GATE_PASSES : uses
+    PROPERTIES ||--o{ VISITOR_LOGS : records
+    PROPERTIES ||--o{ APP_VERSIONS : tracks
+
+    USERS {
+        string uid PK
+        string role
+        string phone
+        string propertyId FK
+    }
+    PROPERTIES {
+        string id PK
+        string name
+        string address
+        object branding
+    }
+    UNITS {
+        string id PK
+        string type
+        string status
+        string propertyId FK
+    }
+    DEALS {
+        string id PK
+        number rent
+        number deposit
+        array escalationTiers
+    }
+    PAYMENT_RECORDS {
+        string id PK
+        string status
+        number amount
+        timestamp date
+    }
+```
 
 | Collection | Purpose |
-| --- | --- |
+|:---|:---|
 | `users` | Owner and tenant profiles, roles, and renter relationships |
 | `properties` | Property identity, branding, contacts, and configuration |
 | `units` | Shops, flats, rooms, beds, and occupancy state |
@@ -561,46 +806,115 @@ The mapping is an implementation detail. The user experience remains a mobile-nu
 | `notifications` | User-targeted alerts and notification state |
 | `appVersions` | Latest version, minimum version, download URL, and notes |
 
+</details>
+
+<br>
+
 ---
 
 ## Application Workflows
 
-### Owner workflow
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#00838F', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#006064', 'lineColor': '#00ACC1', 'fontSize': '13px'}}}%%
+flowchart TB
+    subgraph OWNER["<b>Owner Workflow</b>"]
+        direction TB
+        O1["Firebase Setup<br/>& Bootstrap"] --> O2["Sign In<br/>Admin Console"]
+        O2 --> O3["Set Personal<br/>6-Digit PIN"]
+        O3 --> O4["Create Properties<br/>& Units"]
+        O4 --> O5["Add Lease Deal<br/>via Wizard"]
+        O5 --> O6["Choose Inventory<br/>Commercial / Residential"]
+        O6 --> O7["Configure Rent<br/>Deposit & Tiers"]
+        O7 --> O8["Share Tenant<br/>Credentials"]
+        O8 --> O9["Confirm Payments<br/>Manage & Report"]
+    end
 
-1. Complete Firebase setup and run client bootstrap.
-2. Sign in to the Admin Console with the configured owner mobile number and initial password.
-3. Set a personal six-digit unlock PIN.
-4. Create properties and units.
-5. Add a lease deal using the onboarding wizard.
-6. Choose commercial or residential inventory and select one or more units.
-7. Configure rent, deposit behavior, start date, escalation tiers, and agreement documents.
-8. Share tenant credentials.
-9. Confirm payments, manage advances, publish notices, and review reports.
+    subgraph TENANT_FLOW["<b>Tenant Workflow</b>"]
+        direction TB
+        T1["Install<br/>Tenant App"] --> T2["Sign In<br/>with Credentials"]
+        T2 --> T3["Set Personal<br/>6-Digit PIN"]
+        T3 --> T4["Review Dashboard<br/>& Agreement"]
+        T4 --> T5["Pay via UPI<br/>or Report Offline"]
+        T5 --> T6["Review Utilities<br/>Notices & Receipts"]
+    end
 
-### Tenant workflow
+    O8 -.->|"Credentials"| T1
 
-1. Install the Tenant App.
-2. Sign in using the mobile number and password provided by the owner.
-3. Set a personal six-digit unlock PIN.
-4. Review the dashboard, agreement, current balance, and payment history.
-5. Pay through the configured UPI handoff or report an offline/partial payment.
-6. Review utilities, notices, maintenance requests, gate passes, and receipts.
+    style OWNER fill:#E0F7FA,color:#004D40,stroke:#00838F,stroke-width:2px
+    style TENANT_FLOW fill:#E0F2F1,color:#004D40,stroke:#00838F,stroke-width:2px
+    style O1 fill:#006064,color:#FFFFFF,stroke:#004D40
+    style O2 fill:#00838F,color:#FFFFFF,stroke:#006064
+    style O3 fill:#0097A7,color:#FFFFFF,stroke:#00838F
+    style O4 fill:#00ACC1,color:#FFFFFF,stroke:#0097A7
+    style O5 fill:#00BCD4,color:#004D40,stroke:#00ACC1
+    style O6 fill:#26C6DA,color:#004D40,stroke:#00BCD4
+    style O7 fill:#4DD0E1,color:#004D40,stroke:#26C6DA
+    style O8 fill:#80DEEA,color:#004D40,stroke:#4DD0E1
+    style O9 fill:#B2EBF2,color:#004D40,stroke:#80DEEA
+    style T1 fill:#00838F,color:#FFFFFF,stroke:#006064
+    style T2 fill:#0097A7,color:#FFFFFF,stroke:#00838F
+    style T3 fill:#00ACC1,color:#FFFFFF,stroke:#0097A7
+    style T4 fill:#00BCD4,color:#004D40,stroke:#00ACC1
+    style T5 fill:#26C6DA,color:#004D40,stroke:#00BCD4
+    style T6 fill:#4DD0E1,color:#004D40,stroke:#26C6DA
+```
 
-### Multi-unit and multi-property workflow
+<details>
+<summary><b>Multi-unit and multi-property workflow</b></summary>
+<br>
 
 - Multi-unit deals are consolidated under one active lease while each selected unit remains represented in occupancy data.
 - Secondary units in a consolidated deal are marked occupied and removed from vacant selection.
 - Commercial and residential unit types remain isolated during onboarding.
 - Owners can switch property context from the Admin Console without maintaining separate application installations.
 
+</details>
+
+<br>
+
 ---
 
-## Financial and Operational Engines
+## Financial & Operational Engines
 
-### Rent and advance reconciliation
+### Rent & Advance Reconciliation
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#00838F', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#006064', 'lineColor': '#00ACC1', 'fontSize': '13px'}}}%%
+stateDiagram-v2
+    [*] --> DueGenerated : Monthly cycle starts
+
+    DueGenerated --> ConfirmedPaid : Full payment confirmed
+    DueGenerated --> AdjustedAgainstAdvance : Advance covers dues
+    DueGenerated --> PendingConfirmation : Payment reported
+    DueGenerated --> Overdue : Due date passed
+
+    PendingConfirmation --> ConfirmedPaid : Owner confirms
+    PendingConfirmation --> ConfirmedPartial : Partial confirmed
+
+    ConfirmedPartial --> Overdue : Remaining balance overdue
+    Overdue --> ConfirmedPaid : Full settlement
+
+    ConfirmedPaid --> [*]
+    AdjustedAgainstAdvance --> [*]
+
+    classDef good fill:#00838F,color:#FFFFFF,stroke:#006064
+    classDef pending fill:#00ACC1,color:#FFFFFF,stroke:#0097A7
+    classDef warn fill:#F57F17,color:#FFFFFF,stroke:#E65100
+    classDef neutral fill:#E0F7FA,color:#004D40,stroke:#00838F
+
+    class ConfirmedPaid good
+    class AdjustedAgainstAdvance good
+    class PendingConfirmation pending
+    class ConfirmedPartial pending
+    class Overdue warn
+    class DueGenerated neutral
+```
+
+<details>
+<summary><b>Engine capabilities</b></summary>
+<br>
 
 The shared rent engine supports:
-
 - Monthly due calculation
 - Partial-payment carryover
 - Overdue balance accumulation
@@ -610,21 +924,15 @@ The shared rent engine supports:
 - Rent step-up tiers over time
 - Current-period settlement visibility
 
-Typical payment states include:
+</details>
 
-```text
-confirmed-paid
-adjusted-against-advance
-pending-confirmation
-confirmed-partial
-overdue
-```
-
-### Utility billing
+<details>
+<summary><b>Utility billing formula</b></summary>
+<br>
 
 For electricity and water sub-meters:
 
-```text
+```
 units consumed = current reading - previous reading
 utility charge  = units consumed x rate per unit
 monthly total   = rent + utility charge + applicable adjustments
@@ -632,39 +940,90 @@ monthly total   = rent + utility charge + applicable adjustments
 
 The Admin Console can publish utility charges while the Tenant App exposes the resulting history and statement context.
 
-### Notifications
+</details>
+
+<details>
+<summary><b>Notification logic</b></summary>
+<br>
 
 Automated notification logic can:
-
 - Notify tenants about the rent cycle
 - Reflect whether rent is paid, partially paid, overdue, or covered by advance
 - Remove obsolete overdue alerts after settlement
 - Publish owner-authored property notices
 - Deliver app release prompts when a newer version is available
 
-### Live property branding
+</details>
 
-Property-level settings can be stored in Firestore so contact details, UPI information, and selected branding values can be reflected through cloud configuration. Changes must still be tested carefully in production because they affect the tenant experience immediately.
+<details>
+<summary><b>Live property branding</b></summary>
+<br>
+
+Property-level settings can be stored in Firestore so contact details, UPI information, and selected branding values can be reflected through cloud configuration. Changes affect the tenant experience immediately and must be tested carefully in production.
+
+</details>
+
+<br>
 
 ---
 
 ## Security Model
 
-The repository includes Firestore rules that enforce role and ownership boundaries.
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#00838F', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#006064', 'lineColor': '#00ACC1', 'fontSize': '13px'}}}%%
+flowchart TB
+    subgraph ACCESS["<b>Access Control Matrix</b>"]
+        direction TB
 
-- Unauthenticated users cannot access protected operational records.
-- Owners can manage properties, units, deals, payments, notices, utilities, and administrative records.
-- Tenants can read records connected to their own renter identity.
-- Tenants can create permitted payment, maintenance, and gate-pass records.
-- Tenant updates are restricted to records associated with their authenticated identity.
-- Owner-only deletion protects core administrative data from tenant-side removal.
-- Public reads are limited to intentional launch and branding use cases such as property configuration and app-version checks.
+        subgraph OWNER_PERMS["<b>Owner Permissions</b>"]
+            OP1["Manage properties & units"]
+            OP2["Create & edit deals"]
+            OP3["Confirm payments"]
+            OP4["Publish notices & utilities"]
+            OP5["Administrative record deletion"]
+        end
+
+        subgraph TENANT_PERMS["<b>Tenant Permissions</b>"]
+            TP1["Read own records only"]
+            TP2["Create payment reports"]
+            TP3["Submit maintenance requests"]
+            TP4["Use gate passes"]
+            TP5["No deletion rights"]
+        end
+
+        subgraph PUBLIC_PERMS["<b>Public Access</b>"]
+            PP1["Property configuration"]
+            PP2["App version checks"]
+            PP3["No operational data"]
+        end
+    end
+
+    style ACCESS fill:#FFFFFF,color:#004D40,stroke:#00838F,stroke-width:2px
+    style OWNER_PERMS fill:#006064,color:#FFFFFF,stroke:#004D40,stroke-width:2px
+    style TENANT_PERMS fill:#00838F,color:#FFFFFF,stroke:#006064,stroke-width:2px
+    style PUBLIC_PERMS fill:#0097A7,color:#FFFFFF,stroke:#00838F,stroke-width:2px
+    style OP1 fill:#004D40,color:#FFFFFF,stroke:#00363D
+    style OP2 fill:#006064,color:#FFFFFF,stroke:#004D40
+    style OP3 fill:#00838F,color:#FFFFFF,stroke:#006064
+    style OP4 fill:#0097A7,color:#FFFFFF,stroke:#00838F
+    style OP5 fill:#00ACC1,color:#FFFFFF,stroke:#0097A7
+    style TP1 fill:#00838F,color:#FFFFFF,stroke:#006064
+    style TP2 fill:#0097A7,color:#FFFFFF,stroke:#00838F
+    style TP3 fill:#00ACC1,color:#FFFFFF,stroke:#0097A7
+    style TP4 fill:#00BCD4,color:#004D40,stroke:#00ACC1
+    style TP5 fill:#26C6DA,color:#004D40,stroke:#00BCD4
+    style PP1 fill:#0097A7,color:#FFFFFF,stroke:#00838F
+    style PP2 fill:#00ACC1,color:#FFFFFF,stroke:#0097A7
+    style PP3 fill:#00BCD4,color:#004D40,stroke:#00ACC1
+```
 
 Review [firestore.rules](firestore.rules) before every production deployment. Security rules are part of the application boundary, not an optional deployment detail.
 
-### Credential and secret handling
+<details>
+<summary><b>Credential and secret handling</b></summary>
+<br>
 
-Do not commit real credentials, private keys, owner passwords, or client Firebase configuration to a public repository.
+> **Do not commit real credentials, private keys, owner passwords, or client Firebase configuration to a public repository.**
 
 Before publishing this project publicly:
 
@@ -678,11 +1037,16 @@ Before publishing this project publicly:
 
 Firebase web API keys are not substitutes for access control. Authentication, Firestore rules, package signing, and operational credential hygiene must all be maintained.
 
+</details>
+
+<br>
+
 ---
 
-## Build and Release
+## Build & Release
 
-### Debug builds
+<details>
+<summary><b>Debug builds</b></summary>
 
 ```powershell
 cd "Rentlyo"
@@ -692,7 +1056,10 @@ cd "..\Rentlyo Admin"
 flutter build apk --debug
 ```
 
-### Release builds
+</details>
+
+<details>
+<summary><b>Release builds</b></summary>
 
 ```powershell
 cd "Rentlyo"
@@ -709,28 +1076,33 @@ Or from the root launcher:
 # Choose option 2
 ```
 
-### APK locations
+</details>
 
-```text
+<details>
+<summary><b>APK locations</b></summary>
+
+```
 Rentlyo/build/app/outputs/flutter-apk/app-release.apk
 Rentlyo Admin/build/app/outputs/flutter-apk/app-release.apk
 ```
 
-Before distributing an APK, verify:
+</details>
 
-- The app label and package ID are correct.
-- The client logo and splash screen are correct.
-- The Firebase project is the intended client project.
-- The release is signed with the correct key.
-- Login works for both owner and tenant roles.
-- Firestore rules reject unauthorized reads and writes.
-- UPI, WhatsApp, notifications, file downloads, and update prompts work on a real device.
+<details>
+<summary><b>Pre-distribution checklist</b></summary>
+<br>
 
----
+- [ ] App label and package ID are correct
+- [ ] Client logo and splash screen are correct
+- [ ] Firebase project is the intended client project
+- [ ] Release is signed with the correct key
+- [ ] Login works for both owner and tenant roles
+- [ ] Firestore rules reject unauthorized reads and writes
+- [ ] UPI, WhatsApp, notifications, file downloads, and update prompts work on a real device
 
-## In-App Updates
+</details>
 
-The `appVersions` collection allows the apps to check for new releases and show update prompts.
+### In-App Updates
 
 Publish a release with:
 
@@ -750,6 +1122,10 @@ For the Admin Console, use `rentlyo_admin` as the app ID:
 dart scripts/update_version.dart rentlyo_admin 1.0.1 2 1.0.0 "https://example.com/admin.apk" "Release notes"
 ```
 
+<details>
+<summary><b>Version document fields</b></summary>
+<br>
+
 The command authenticates as the owner and updates the release document with:
 
 - Latest semantic version
@@ -760,44 +1136,48 @@ The command authenticates as the owner and updates the release document with:
 
 Only publish URLs that are stable, accessible to the intended users, and protected by your release process.
 
+</details>
+
+<br>
+
 ---
 
 ## Database Operations
 
-The database cleaner is intended for development, demo, and test reset scenarios. It removes transactional and temporary records while retaining the owner account and property branding document.
+The database cleaner is intended for development, demo, and test reset scenarios.
 
 ```powershell
 # Interactive reset
- dart scripts/clean_database.dart
+dart scripts/clean_database.dart
 
 # Keep units while cleaning transactional records
- dart scripts/clean_database.dart --keep-units
+dart scripts/clean_database.dart --keep-units
 
-# Non-interactive reset; use only in a controlled environment
- dart scripts/clean_database.dart --force
+# Non-interactive reset (controlled environment only)
+dart scripts/clean_database.dart --force
 ```
 
-The reset operation can remove deals, payment records, units, maintenance requests, utility bills, gate passes, visitor logs, menus, notifications, notices, and non-owner user profiles. Confirm the target Firebase project before running it.
+> The reset operation can remove deals, payment records, units, maintenance requests, utility bills, gate passes, visitor logs, menus, notifications, notices, and non-owner user profiles. **Confirm the target Firebase project before running it.**
+
+<br>
 
 ---
 
 ## Testing
 
-Tenant tests:
-
 ```powershell
+# Tenant tests
 cd "Rentlyo"
 flutter test
-```
 
-Admin tests:
-
-```powershell
+# Admin tests
 cd "..\Rentlyo Admin"
 flutter test
 ```
 
-The test suites cover important areas such as:
+<details>
+<summary><b>Test coverage areas</b></summary>
+<br>
 
 - Rent and advance calculation
 - Model behavior
@@ -808,40 +1188,50 @@ The test suites cover important areas such as:
 
 For production releases, supplement unit and widget tests with a real-device acceptance pass against a non-production Firebase project.
 
+</details>
+
+<br>
+
 ---
 
 ## Troubleshooting
 
 | Symptom | Resolution |
-| --- | --- |
-| `setup_client.dart` not found | Run the launcher from the repository root and keep `scripts/` beside the launcher. |
-| Dart or Flutter not found | Install Flutter, add it to `PATH`, then run `flutter doctor`. |
-| Owner login fails | Run the complete setup or bootstrap flow and verify the Firebase project and owner credentials. |
-| Firebase project mismatch | Replace `client_assets/google-services.json`, verify `client_config.json`, and run `--verify`. |
-| No units appear | Check the selected property context in the Admin Console and verify the unit documents in Firestore. |
-| Wrong branding appears | Update `client_config.json` and assets, then run the complete client setup again. |
-| APK cannot install | Check Android signing, package ID, device compatibility, and Play Protect warnings for sideloaded APKs. |
-| Updates do not appear | Verify the `appVersions` document, minimum version, APK URL, and Firestore read rules. |
-| Reset command is blocked | Use the interactive confirmation or provide `--force` only after verifying the target project. |
+|:---|:---|
+| `setup_client.dart` not found | Run the launcher from the repository root; keep `scripts/` beside the launcher. |
+| Dart or Flutter not found | Install Flutter, add to `PATH`, run `flutter doctor`. |
+| Owner login fails | Run complete setup or bootstrap flow; verify Firebase project and owner credentials. |
+| Firebase project mismatch | Replace `client_assets/google-services.json`, verify `client_config.json`, run `--verify`. |
+| No units appear | Check property context in Admin Console; verify unit documents in Firestore. |
+| Wrong branding appears | Update `client_config.json` and assets, then re-run client setup. |
+| APK cannot install | Check Android signing, package ID, device compatibility, and Play Protect warnings. |
+| Updates do not appear | Verify `appVersions` document, minimum version, APK URL, and Firestore read rules. |
+| Reset command blocked | Use interactive confirmation or provide `--force` only after verifying target project. |
 
-When diagnosing a client deployment, run the pre-flight check first:
+**Run the pre-flight check first:**
 
 ```powershell
 dart scripts/setup_client.dart --verify
 ```
 
+<br>
+
 ---
 
 ## Production Checklist
 
-### Configuration
+<details>
+<summary><b>Configuration</b></summary>
 
 - [ ] Client name, brand name, property ID, address, and currency are correct.
 - [ ] App names, taglines, colors, logo, and optional banner are correct.
 - [ ] Support phone, WhatsApp number, email, and UPI ID are correct.
 - [ ] Firebase project and Android package identifiers are correct.
 
-### Backend
+</details>
+
+<details>
+<summary><b>Backend</b></summary>
 
 - [ ] Email/Password authentication is enabled.
 - [ ] Firestore is in the intended region and mode.
@@ -850,7 +1240,10 @@ dart scripts/setup_client.dart --verify
 - [ ] No test tenant records remain.
 - [ ] No client secrets are exposed in source control.
 
-### Application
+</details>
+
+<details>
+<summary><b>Application</b></summary>
 
 - [ ] Owner login and PIN unlock work.
 - [ ] Tenant login and PIN unlock work.
@@ -863,32 +1256,52 @@ dart scripts/setup_client.dart --verify
 - [ ] Release APKs are signed and versioned.
 - [ ] Update metadata points to the correct artifacts.
 
+</details>
+
+<br>
+
 ---
 
 ## Documentation
 
-- [Master production and deployment guide](MASTER_PRODUCTION_AND_CLIENT_DEPLOYMENT_GUIDE.md)
-- [Tenant application README](Rentlyo/README.md)
-- [Admin Console README](Rentlyo%20Admin/README.md)
-- [Firestore security rules](firestore.rules)
-- [Client configuration](client_config.json)
+| Document | Description |
+|:---|:---|
+| [Master Production & Deployment Guide](MASTER_PRODUCTION_AND_CLIENT_DEPLOYMENT_GUIDE.md) | Full operational walkthrough |
+| [Tenant Application README](Rentlyo/README.md) | Screen-level feature notes |
+| [Admin Console README](Rentlyo%20Admin/README.md) | Admin workflow details |
+| [Firestore Security Rules](firestore.rules) | Role-based access definitions |
+| [Client Configuration](client_config.json) | White-label config source |
 
-The app-specific READMEs contain screen-level feature notes. This root README documents the complete suite, its operating model, and its deployment lifecycle.
+<br>
 
 ---
 
 ## License
 
-This project is private and proprietary software unless a separate written license says otherwise. The source code, branding, configuration, deployment scripts, Firebase rules, and generated client applications may not be redistributed, resold, or deployed for another party without authorization from the project owner.
+This project is **private and proprietary software** unless a separate written license says otherwise. The source code, branding, configuration, deployment scripts, Firebase rules, and generated client applications may not be redistributed, resold, or deployed for another party without authorization from the project owner.
+
+<br>
 
 ---
 
 <div align="center">
 
-### Rentlyo
+<img src="assets/rentlyo-icon.png" alt="Rentlyo" width="64">
 
-**Clear leases. Reliable ledgers. Better property operations.**
+<br><br>
+
+**Rentlyo**
+
+*Clear leases. Reliable ledgers. Better property operations.*
 
 Built as a complete, configurable property-management platform for the real world.
+
+<br>
+
+[![Website](https://img.shields.io/badge/Website-rentlyo.cscouncil.in-00838F?style=for-the-badge&logo=googlechrome&logoColor=white)](https://rentlyo.cscouncil.in/)
+
+<br>
+
+<sub>Built with Flutter, Firebase, and Dart</sub>
 
 </div>

@@ -1,0 +1,33 @@
+# Rentlyo Credentials & Sensitive Config
+client_config.json
+
+# Web Landing Page (Separate repository)
+WEB/
+
+# Web & Node dependencies
+node_modules/
+.npm/
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build Outputs (Flutter & Android)
+**/build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+*.apk
+**/.gradle/

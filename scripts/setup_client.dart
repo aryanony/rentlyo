@@ -505,6 +505,22 @@ Options:
     resolvedLogo.copySync('${dirs.renterDir.path}/assets/images/logo.png');
     resolvedLogo.copySync('${dirs.adminDir.path}/assets/images/logo.png');
     stdout.writeln('  ✅ Logo updated from: ${resolvedLogo.path}');
+
+    // Copy or generate un-zoomed launcher icons with white background
+    final clientAppIcon = File('client_assets/app_icon.png');
+    final clientAppIconFg = File('client_assets/app_icon_foreground.png');
+    if (clientAppIcon.existsSync() && clientAppIconFg.existsSync()) {
+      clientAppIcon.copySync('${dirs.renterDir.path}/assets/images/app_icon.png');
+      clientAppIcon.copySync('${dirs.adminDir.path}/assets/images/app_icon.png');
+      clientAppIconFg.copySync('${dirs.renterDir.path}/assets/images/app_icon_foreground.png');
+      clientAppIconFg.copySync('${dirs.adminDir.path}/assets/images/app_icon_foreground.png');
+      stdout.writeln('  ✅ Safe-zone Launcher Icons synced from client_assets.');
+    } else {
+      try {
+        Process.runSync('pwsh', ['-File', 'scripts/generate_app_icons.ps1', '-SourceLogoPath', resolvedLogo.path]);
+        stdout.writeln('  ✅ Safe-zone Launcher Icons generated via generate_app_icons.ps1.');
+      } catch (_) {}
+    }
   }
 
   // Smart Banner Detection & Copying
@@ -851,7 +867,15 @@ void _updatePubspec(String filePath, String primaryHex) {
   String content = file.readAsStringSync();
   content = content.replaceAll(
     RegExp(r'adaptive_icon_background:\s*"#[0-9A-Fa-f]{6}"'),
-    'adaptive_icon_background: "#$primaryHex"',
+    'adaptive_icon_background: "#FFFFFF"',
+  );
+  content = content.replaceAll(
+    'image_path: "assets/images/logo.png"',
+    'image_path: "assets/images/app_icon.png"',
+  );
+  content = content.replaceAll(
+    'adaptive_icon_foreground: "assets/images/logo.png"',
+    'adaptive_icon_foreground: "assets/images/app_icon_foreground.png"',
   );
   content = content.replaceAll(
     RegExp(r'color:\s*"#[0-9A-Fa-f]{6}"'),
